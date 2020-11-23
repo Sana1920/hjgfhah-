@@ -1,28 +1,16 @@
-name: Build and Test
-
+name: Build and Tests
 on: [push, pull_request]
-
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/upload-artifact@v2
-        with:
-           name: my-artifact
-           path: build/reports
-      - uses: actions/ckeckout@v1
+      - uses: actions/checkout@v1
         name: Git Checkout
       - uses: actions/setup-java@v1
         name: Java installieren
-        with: 
+        with:
           java-version: 11
-      - name: Run Gradle Test
-        run: ./gradlew test
-      - name: Run Gradle Check
-        if: success()
+      - name: Run Gradle
         run: ./gradlew check
-      - name: CI-SKIP-ACTION
-        uses: mstachniuk/ci-skip@v1
     
      
